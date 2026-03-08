@@ -1,16 +1,20 @@
 <?php
 
+// This migration creates the 'jobs', 'job_batches', and 'failed_jobs' tables for managing background jobs in the application.
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+// This migration creates the 'jobs', 'job_batches', and 'failed_jobs' tables for managing background jobs in the application.
 return new class extends Migration
 {
     /**
      * Run the migrations.
      */
+    // The 'up' method defines the schema for the 'jobs', 'job_batches', and 'failed_jobs' tables.
     public function up(): void
     {
+        // The 'jobs' table stores information about background jobs, including the queue, payload, attempts, and timestamps.
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('queue')->index();
@@ -21,6 +25,7 @@ return new class extends Migration
             $table->unsignedInteger('created_at');
         });
 
+        // The 'job_batches' table stores information about batches of jobs, including the batch name, total jobs, pending jobs, failed jobs, and timestamps.
         Schema::create('job_batches', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('name');
@@ -34,6 +39,7 @@ return new class extends Migration
             $table->integer('finished_at')->nullable();
         });
 
+        // The 'failed_jobs' table stores information about failed background jobs, including the connection, queue, payload, exception, and timestamps.
         Schema::create('failed_jobs', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique();
@@ -48,6 +54,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
+    //  The 'down' method drops the 'jobs', 'job_batches', and 'failed_jobs' tables if they exist.
     public function down(): void
     {
         Schema::dropIfExists('jobs');

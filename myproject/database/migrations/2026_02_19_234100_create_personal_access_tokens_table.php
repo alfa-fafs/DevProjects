@@ -1,14 +1,17 @@
 <?php
 
+// This migration creates the 'personal_access_tokens' table for storing API tokens associated with users or other tokenable entities in the application.
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+// This migration creates the 'personal_access_tokens' table for storing API tokens associated with users or other tokenable entities in the application.
 return new class extends Migration
 {
     /**
      * Run the migrations.
      */
+    // The 'up' method defines the schema for the 'personal_access_tokens' table, which includes fields for the tokenable entity, token name, token value, abilities, last used timestamp, expiration timestamp, and standard timestamps.
     public function up(): void
     {
         Schema::create('personal_access_tokens', function (Blueprint $table) {
@@ -26,6 +29,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
+    // The 'down' method drops the 'personal_access_tokens' table if it exists.
     public function down(): void
     {
         Schema::dropIfExists('personal_access_tokens');

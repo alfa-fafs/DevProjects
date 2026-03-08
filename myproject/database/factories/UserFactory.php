@@ -1,5 +1,6 @@
 <?php
 
+// This factory defines the default state for the User model, including generating fake data for the user's name, email, phone number, and other attributes. It also includes a method to create an unverified user by setting the 'email_verified_at' attribute to null.
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -26,6 +27,7 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
+            'phone' => fake()->phoneNumber(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),

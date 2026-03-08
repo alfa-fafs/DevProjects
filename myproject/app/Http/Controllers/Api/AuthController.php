@@ -14,14 +14,14 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20|unique:users',
-            'password' => 'required|string|min:6',
-        ]);
+    'name' => 'required|string',
+    'email' => 'required|string|email|unique:users',
+    'password' => 'required|string|confirmed'
+]);
 
         $user = User::create([
             'name' => $request->name,
-            'phone' => $request->phone,
+            'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
@@ -36,26 +36,26 @@ class AuthController extends Controller
 
     // Login
     public function login(Request $request)
-    {
-        $request->validate([
-            'phone' => 'required|string',
-            'password' => 'required',
-        ]);
+{
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
 
-        $user = User::where('phone', $request->phone)->first();
+    $user = User::where('email', $request->email)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'phone' => ['Invalid credentials.'],
-            ]);
-        }
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()->json([
-            'message' => 'Login successful',
-            'access_token' => $token,
-            'token_type' => 'Bearer',
+    if (!$user || !Hash::check($request->password, $user->password)) {
+        throw ValidationException::withMessages([
+            'email' => ['Invalid credentials.'],
         ]);
     }
+
+    $token = $user->createToken('auth_token')->plainTextToken;
+
+    return response()->json([
+        'message' => 'Login successful',
+        'access_token' => $token,
+        'token_type' => 'Bearer',
+    ]);
+}
 }

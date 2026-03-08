@@ -6,5 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Favorite extends Model
 {
-    //
+    protected $fillable = [
+        'user_id',
+        'nickname',
+        'pickup_location',
+        'dropoff_location',
+        'pickup_lat',
+        'pickup_lng',
+        'dropoff_lat',
+        'dropoff_lng',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
