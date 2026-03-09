@@ -67,6 +67,9 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     // Admin ride management routes
     Route::get('/admin/rides', [AdminRideController::class, 'index']);
 
+    // Admin route to view ride details
+    Route::get('/admin/rides/{id}', [AdminRideController::class, 'show']);
+
     // Admin route to update ride status
     Route::patch('/admin/rides/{id}/status', [AdminRideController::class, 'updateStatus']);
 });

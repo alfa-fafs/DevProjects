@@ -14,6 +14,8 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+
+        // Get the currently authenticated user. If there is no authenticated user, return a 401 Unauthenticated response. If the user is authenticated but does not have admin privileges, return a 403 Access Denied response. If the user is an admin, allow the request to proceed to the next middleware or controller.    
         $user = auth()->user();
 
         if (!$user) {

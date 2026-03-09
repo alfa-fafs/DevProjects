@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
+// This controller handles admin-specific actions related to rides, such as listing all rides with optional status filtering, updating ride status, and viewing ride details. It uses the AdminMiddleware to ensure that only authenticated admin users can access these routes.
 use App\Http\Controllers\Controller;
 use App\Models\Ride;
 use Illuminate\Http\Request;
 
+// This controller handles admin-specific actions related to rides, such as listing all rides with optional status filtering, updating ride status, and viewing ride details. It uses the AdminMiddleware to ensure that only authenticated admin users can access these routes.
 class AdminRideController extends Controller
 {
+    // Admin route to list all rides with optional status filter
     public function index(Request $request)
     {
         $request->validate([
@@ -25,6 +28,17 @@ class AdminRideController extends Controller
         return response()->json($rides);
     }
 
+     // Admin route to view ride details
+    public function show($id)
+{
+    $ride = Ride::with(['user', 'fareEstimates'])->findOrFail($id);
+
+    return response()->json([
+        'ride' => $ride
+    ]);
+}
+
+    // Admin route to update ride status
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
@@ -41,4 +55,6 @@ class AdminRideController extends Controller
             'ride' => $ride
         ]);
     }
+
+   
 }
