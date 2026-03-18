@@ -15,8 +15,8 @@ class AuthController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20|unique:users',
-            'password' => 'required|string|min:6',
+            'phone' => 'required|string|unique:users,phone',
+            'password' => 'required|string|min:6|confirmed',
         ]);
 
         $user = User::create([
@@ -33,29 +33,29 @@ class AuthController extends Controller
             'token_type' => 'Bearer',
         ]);
     }
-
     // Login
     public function login(Request $request)
     {
         $request->validate([
             'phone' => 'required|string',
-            'password' => 'required',
+            'password' => 'required|string',
         ]);
 
         $user = User::where('phone', $request->phone)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
-                'phone' => ['Invalid credentials.'],
+                'phone' => ['The provided credentials are incorrect.'],
             ]);
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
-            'message' => 'Login successful',
+            'message' => 'User logged in successfully',
             'access_token' => $token,
             'token_type' => 'Bearer',
         ]);
     }
+
 }

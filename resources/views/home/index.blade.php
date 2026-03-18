@@ -39,7 +39,7 @@
     }
   </style>
     <!-- Hero Section -->
-    <div class="bg-gradient-to-r from-green-600 to-green-700 text-white py-12">
+    <div class="text-white py-12" style="background: #39C70D;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
                 <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
@@ -56,7 +56,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Left Panel - Location Inputs -->
-            <div id="formContainer" class="lg:col-span-3 max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto space-y-6">
+            <div id="formContainer" class="lg:col-span-3 space-y-6">
+               <div id="formInner" class="max-w-4xl mx-auto">
                 <!-- Location Form -->
                 <div class="bg-white rounded-xl shadow-lg p-6">
                     <h2 class="text-lg md:text-xl font-bold text-gray-900 mb-4">Where to?</h2>
@@ -112,6 +113,13 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                             </svg>
                         </button>
+                        <!-- Recent Locations -->
+                      <div id="recentLocations" class="hidden">
+                     <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-1 mt-2">
+                       Recent
+                         </p>
+                      <div id="recentList" class="space-y-1 mb-3"></div>
+                     </div>
                          <!-- Clear Button -->
                         <button 
                          type="button"
@@ -136,16 +144,16 @@
             <div class="text-3xl">💰</div>
             <div>
                 <p class="text-sm font-medium">Best Deal Available</p>
-                <p class="text-lg font-bold">Save up to GH₵ 8.00 with inDrive!</p>
+                <p id="bestDealText" class="text-lg font-bold">Calculating...</p>
             </div>
         </div>
         <div class="text-right">
-            <p class="text-2xl font-bold">27% OFF</p>
+            <p id="savingPctText" class="text-2xl font-bold">--%</p>
             <p class="text-xs">vs most expensive</p>
         </div>
     </div>
  </div>
-    <!-- inDrive - CHEAPEST (GH₵ 22.00) -->
+    <!-- inDrive -->
     <div id="indriveCard" class="bg-white rounded-xl shadow-lg p-4 hover:shadow-xl transition cursor-pointer border-2 border-green-500">
         <div class="flex items-center justify-between">
             <div class="flex items-center space-x-3">
@@ -161,14 +169,14 @@
                 </div>
             </div>
             <div class="text-right">
-                <p class="text-2xl font-bold text-green-600">GH₵ 22.00</p>
-                <p class="text-xs text-green-600 font-semibold">Save GH₵ 8.00</p>
-                <p class="text-xs text-gray-500">10 mins</p>
+                <p class="text-2xl font-bold text-green-600 price display">--</p>
+                <p class="text-xs text-green-600 font-semibold saving-display"></p>
+                <p class="text-xs text-gray-500 eta-display"></p>
             </div>
         </div>
     </div>
     
-    <!-- Bolt (GH₵ 25.50) -->
+    <!-- Bolt -->
     <div id="boltCard" class="bg-white rounded-xl shadow-lg p-4 hover:shadow-xl transition cursor-pointer">
         <div class="flex items-center justify-between">
             <div class="flex items-center space-x-3">
@@ -181,14 +189,14 @@
                 </div>
             </div>
             <div class="text-right">
-                <p class="text-2xl font-bold text-green-600">GH₵ 25.50</p>
-                <p class="text-xs text-green-600 font-semibold">Save GH₵ 4.50</p>
-                <p class="text-xs text-gray-500">5 mins</p>
+                <p class="text-2xl font-bold text-green-600 price display"></p>
+                <p class="text-xs text-green-600 font-semibold saving-display"></p>
+                <p class="text-xs text-gray-500 eta-display"></p>
             </div>
         </div>
     </div>
     
-    <!-- Uber (GH₵ 28.00) -->
+    <!-- Uber -->
     <div id="uberCard" class="bg-white rounded-xl shadow-lg p-4 hover:shadow-xl transition cursor-pointer">
         <div class="flex items-center justify-between">
             <div class="flex items-center space-x-3">
@@ -201,14 +209,14 @@
                 </div>
             </div>
             <div class="text-right">
-                <p class="text-2xl font-bold text-green-600">GH₵ 28.00</p>
-                <p class="text-xs text-green-600 font-semibold">Save GH₵ 2.00</p>
-                <p class="text-xs text-gray-500">7 mins</p>
+                <p class="text-2xl font-bold text-green-600 price display"></p>
+                <p class="text-xs text-green-600 font-semibold saving-display"></p>
+                <p class="text-xs text-gray-500 eta-display"></p>
             </div>
         </div>
     </div>
     
-    <!-- Taxi (GH₵ 30.00) -->
+    <!-- Taxi-->
     <div id="taxiCard" class="bg-white rounded-xl shadow-lg p-4 hover:shadow-xl transition cursor-pointer">
         <div class="flex items-center justify-between">
             <div class="flex items-center space-x-3">
@@ -221,14 +229,16 @@
                 </div>
             </div>
             <div class="text-right">
-                <p class="text-2xl font-bold text-green-600">GH₵ 30.00</p>
-                <p class="text-xs text-gray-500">12 mins</p>
+                <p class="text-2xl font-bold text-green-600 price-display"></p>
+                <p class="text-xs text-gray-500 eta-display"></p>
             </div>
         </div>
     </div>
  </div>
-</div>
+    </div> <!-- Closes formInner -->
+</div> <!-- Closes formContainer -->
     
+            
             
            <!-- Right Panel - Map -->
  <div id="mapContainer" class="lg:col-span-2 hidden">
@@ -348,21 +358,34 @@
                       .bindPopup('🎯 Dropoff: ' + dropoffAddress);
                     
                     // Add route line
-                    routeControl = L.Routing.control({
-                        waypoints: [
-                            L.latLng(pickupLat, pickupLng),
-                            L.latLng(dropoffLat, dropoffLng)
-                        ],
-                        routeWhileDragging: false,
-                        addWaypoints: false,
-                        draggableWaypoints: false,
-                        fitSelectedRoutes: true,
-                        showAlternatives: false,
-                        lineOptions: {
-                            styles: [{color: '#16a34a', opacity: 0.8, weight: 5}]
-                        },
-                        createMarker: function() { return null; } // Don't create default markers
-                    }).addTo(map);
+                   routeControl = L.Routing.control({
+                     waypoints: [
+                     L.latLng(pickupLat, pickupLng),
+                     L.latLng(dropoffLat, dropoffLng)
+                     ],
+                     routeWhileDragging: false,
+                     addWaypoints: false,
+                     draggableWaypoints: false,
+                     fitSelectedRoutes: true,
+                      showAlternatives: false,
+                     lineOptions: {
+                       styles: [{color: '#16a34a', opacity: 0.8, weight: 5}]
+                     },
+                      createMarker: function() { return null; }
+                   }).addTo(map);
+
+                // 👇 THIS is what extracts distance & duration
+                    routeControl.on('routesfound', function(e) {
+                   const route       = e.routes[0].summary;
+                    const distanceKm  = (route.totalDistance / 1000).toFixed(2);
+                   const durationMin = Math.ceil(route.totalTime / 60);
+
+                  console.log('Distance:', distanceKm, 'km');
+                 console.log('Duration:', durationMin, 'mins');
+
+                 // Now fetch live fares
+                  fetchFares(distanceKm, durationMin);
+                   });
                     
                     // Fit map to show both markers
                     const bounds = L.latLngBounds([
@@ -395,6 +418,7 @@
  // Initialize map when page loads
  document.addEventListener('DOMContentLoaded', function() {
     initializeMap();
+    loadRecentLocations();
  });
  // Function to add route to map
 function showRouteOnMap(pickupAddress, dropoffAddress) {
@@ -475,7 +499,17 @@ function showRouteOnMap(pickupAddress, dropoffAddress) {
                         },
                         createMarker: function() { return null; }
                     }).addTo(map);
-                    
+                    routeControl.on('routesfound', function(e) {
+                   const route       = e.routes[0].summary;
+                    const distanceKm  = (route.totalDistance / 1000).toFixed(2);
+                   const durationMin = Math.ceil(route.totalTime / 60);
+
+                 console.log('Distance:', distanceKm, 'km');
+                 console.log('Duration:', durationMin, 'mins');
+
+                 // Fetch live fares
+                 fetchFares(distanceKm, durationMin);
+             });
                     // Fit map to show both markers
                     const bounds = L.latLngBounds([
                         [pickupLat, pickupLng],
@@ -541,11 +575,41 @@ setTimeout(() => {
     }
     
     // Book Ride Function
+    function getVehicleType(serviceType) {
+    const types = {
+        'indrive': 'Standard',
+        'bolt':    'Bolt Go',
+        'uber':    'UberX',
+        'taxi':    'Local Cab'
+    };
+    return types[serviceType] || serviceType;
+}
     function bookRide(rideName, price, serviceType) {
         console.log('bookRide called:', rideName, price);
         
         const pickup = document.getElementById('pickupInput').value;
         const dropoff = document.getElementById('dropoffInput').value;
+        //save to history
+      fetch('/history', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({
+            pickup_address:  pickup,
+            dropoff_address: dropoff,
+            pickup_lat:      pickupMarker ? pickupMarker.getLatLng().lat : 0,
+            pickup_lng:      pickupMarker ? pickupMarker.getLatLng().lng : 0,
+            dropoff_lat:     dropoffMarker ? dropoffMarker.getLatLng().lat : 0,
+            dropoff_lng:     dropoffMarker ? dropoffMarker.getLatLng().lng : 0,
+            provider:        rideName,
+            vehicle_type:    getvehicleType(serviceType),
+            price:           parseFloat(price),
+        })
+    }).then(res => res.json())
+      .then(data => console.log('Ride saved:', data))
+      .catch(err => console.error('Save error:', err));
         
         // Create booking summary
         const bookingDetails = 
@@ -697,9 +761,11 @@ setTimeout(() => {
                  const formContainer = document.getElementById('formContainer');
                  const mapContainer = document.getElementById('mapContainer');
     
-                  // Change form from centered to left column
-                 formContainer.classList.remove('lg:col-span-3', 'max-w-xl', 'md:max-w-2xl', 'lg:max-w-4xl', 'mx-auto');
-                 formContainer.classList.add('lg:col-span-3', 'max-w-xl', 'md:max-w-2xl', 'lg:max-w-4xl', 'mx-auto');
+                 // Change form from centered to left column
+                 const formInner = document.getElementById('formInner');
+                 formContainer.classList.remove('lg:col-span-3');
+                 formContainer.classList.add('lg:col-span-1');
+                 formInner.classList.remove('max-w-4xl', 'mx-auto');
     
                  // Show map container
                  mapContainer.classList.remove('hidden');
@@ -714,6 +780,8 @@ setTimeout(() => {
     
                   // Show route on map
                   showRouteOnMap(pickup, dropoff);
+                  saveLocation(pickup, pickup + ', Accra, Ghana'); 
+                  saveLocation(dropoff, dropoff + ', Accra, Ghana');
     
                  // Scroll to results
                  ridesSection.scrollIntoView({ behavior: 'smooth' });
@@ -748,13 +816,14 @@ if (clearBtn) {
         // Hide results
         document.getElementById('availableRides').classList.add('hidden');
         // Reset to centered layout
-         const formContainer = document.getElementById('formContainer');
-         const mapContainer = document.getElementById('mapContainer');
+        const formContainer = document.getElementById('formContainer');
+        const mapContainer = document.getElementById('mapContainer');
 
-         formContainer.classList.remove('lg:col-span-3', 'max-w-xl', 'md:max-w-2xl', 'lg:max-w-4xl', 'mx-auto');
-       formContainer.classList.add('lg:col-span-3', 'max-w-xl', 'md:max-w-2xl', 'lg:max-w-4xl', 'mx-auto');
-
-mapContainer.classList.add('hidden');
+        const formInner = document.getElementById('formInner');
+        formContainer.classList.remove('lg:col-span-1');
+        formContainer.classList.add('lg:col-span-3');
+        formInner.classList.add('max-w-4xl', 'mx-auto');
+        mapContainer.classList.add('hidden');
         // Remove markers and route from map
         if (pickupMarker) map.removeLayer(pickupMarker);
         if (dropoffMarker) map.removeLayer(dropoffMarker);
@@ -766,6 +835,147 @@ mapContainer.classList.add('hidden');
         console.log('Form cleared');
     });
  }
+ // Fetch live fares from Laravel API
+function fetchFares(distanceKm, durationMin) {
+    console.log('Fetching fares for', distanceKm, 'km,', durationMin, 'mins');
+
+    fetch(`/api/fares?distance_km=${distanceKm}&duration_min=${durationMin}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log('Fares received:', data);
+            updateRideCards(data.fares, data.best_savings, data.savings_pct, data.provider);
+        })
+        .catch(error => {
+            console.error('Error fetching fares:', error);
+        });
+}
+
+// Update the ride cards with live prices
+function updateRideCards(fares, bestSavings, savingsPct, bestProvider) {
+    const maxFare = Math.max(...fares.map(f => f.fare));
+
+   // Update best deal banner
+const bestDealEl = document.getElementById('bestDealText');
+const savingsPctEl = document.getElementById('savingsPctText');
+
+if (bestDealEl) bestDealEl.innerHTML =
+    `Save up to GH₵ ${bestSavings.toFixed(2)} with ${bestProvider}!`;
+if (savingsPctEl) savingsPctEl.innerHTML =
+    `${savingsPct}% OFF`;
+    // Map provider names to card IDs
+    const cardMap = {
+        'inDrive': 'indriveCard',
+        'Bolt':    'boltCard',
+        'Uber':    'uberCard',
+        'Taxi':    'taxiCard'
+    };
+
+    fares.forEach((ride, index) => {
+        const cardId = cardMap[ride.name];
+        if (!cardId) return;
+
+        const card    = document.getElementById(cardId);
+        if (!card) return;
+
+        const saving  = (maxFare - ride.fare).toFixed(2);
+
+        // Update price
+        card.querySelector('.text-2xl.font-bold.text-green-600').textContent =
+            `GH₵ ${ride.fare.toFixed(2)}`;
+
+        // Update savings label
+        const savingEl = card.querySelector('.text-xs.text-green-600.font-semibold');
+        if (savingEl) {
+            savingEl.textContent = saving > 0 ? `Save GH₵ ${saving}` : '';
+        }
+
+        // Highlight cheapest card
+        if (index === 0) {
+            card.classList.add('border-2', 'border-green-500');
+        } else {
+            card.classList.remove('border-2', 'border-green-500');
+        }
+    });
+
+    // Also update bookRide click handlers with new prices
+    fares.forEach(ride => {
+        const cardMap2 = {
+            'inDrive': { id: 'indriveCard', type: 'indrive' },
+            'Bolt':    { id: 'boltCard',    type: 'bolt'    },
+            'Uber':    { id: 'uberCard',    type: 'uber'    },
+            'Taxi':    { id: 'taxiCard',    type: 'taxi'    },
+        };
+        const info = cardMap2[ride.name];
+        if (!info) return;
+
+        const card = document.getElementById(info.id);
+        if (card) {
+            card.onclick = () => bookRide(ride.name, ride.fare.toFixed(2), info.type);
+        }
+    });
+}
+// Load recent locations on page load
+function loadRecentLocations() {
+    fetch('/recent-locations')
+        .then(r => r.json())
+        .then(locations => {
+            if (!locations.length) return;
+
+            const list      = document.getElementById('recentList');
+            const container = document.getElementById('recentLocations');
+
+            list.innerHTML = locations.map(loc => `
+                <div class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-50 cursor-pointer transition border border-gray-100"
+                     onclick="fillLocation('${loc.location_name.replace(/'/g, "\\'")}')">
+                    <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0 text-sm">
+                        📍
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-gray-800">${loc.location_name}</p>
+                        <p class="text-xs text-gray-400">${loc.address}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            container.classList.remove('hidden');
+        })
+        .catch(() => {});
+}
+
+// Fill whichever input is empty first
+function fillLocation(name) {
+    const pickup  = document.getElementById('pickupInput');
+    const dropoff = document.getElementById('dropoffInput');
+
+    if (!pickup.value) {
+        pickup.value = name;
+        pickup.classList.remove('border-red-500', 'border-2');
+        document.getElementById('dropoffInput').focus();
+    } else if (!dropoff.value) {
+        dropoff.value = name;
+        dropoff.classList.remove('border-red-500', 'border-2');
+    } else {
+        pickup.value = name;
+    }
+}
+
+// Save location to history
+function saveLocation(name, address) {
+    fetch('/save-location', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+        },
+        body: JSON.stringify({
+            location_name: name,
+            address:       address
+        })
+    })
+    .then(r => r.json())
+    .then(data => console.log('Save location response:', data))
+    .catch(err => console.error('Save location error:', err));
+}
  // Allow Enter key to submit
  document.getElementById('pickupInput').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {

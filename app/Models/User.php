@@ -1,52 +1,47 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+namespace App\Models;
 
-return new class extends Migration
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
+class User extends Authenticatable
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('phone', 9)->unique(); // Ghana phone number without country code
-            $table->string('name')->nullable();
-            $table->string('email')->nullable();
-            $table->string('default_pickup')->nullable();
-            $table->json('preferred_providers')->nullable(); // ['Bolt', 'Uber', 'inDrive']
-            $table->boolean('price_alerts')->default(false);
-            $table->timestamp('phone_verified_at')->nullable();
-            $table->rememberToken();
-            $table->timestamps();
-        });
+    use HasFactory, Notifiable;
 
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
-        });
-
-        Schema::create('sessions', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->foreignId('user_id')->nullable()->index();
-            $table->string('ip_address', 45)->nullable();
-            $table->text('user_agent')->nullable();
-            $table->longText('payload');
-            $table->integer('last_activity')->index();
-        });
-    }
+    protected $table = 'users';
 
     /**
-     * Reverse the migrations.
+     * The attributes that are mass assignable.
      */
-    public function down(): void
-    {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
-        Schema::dropIfExists('sessions');
-    }
-};
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'password',
+        'default_pickup',
+        'preferred_providers',
+        'price_alerts',
+        'phone_verified_at',
+    ];
+
+    /**
+     * The attributes that should be hidden.
+     */
+    protected $hidden = [
+        'remember_token',
+        'password',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     */
+    protected $casts = [
+        'email_verified_at'  => 'datetime',
+        'phone_verified_at'  => 'datetime',
+        'preferred_providers' => 'array',
+        'price_alerts'        => 'boolean',
+        'password'            => 'hashed',
+    ];
+}
