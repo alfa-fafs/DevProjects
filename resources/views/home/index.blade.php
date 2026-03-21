@@ -586,6 +586,8 @@ setTimeout(() => {
 }
     function bookRide(rideName, price, serviceType) {
         console.log('bookRide called:', rideName, price);
+        // Show payment method selection before booking
+       window.location.href = '/payment-methods';
         
         const pickup = document.getElementById('pickupInput').value;
         const dropoff = document.getElementById('dropoffInput').value;

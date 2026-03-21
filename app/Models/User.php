@@ -44,4 +44,8 @@ class User extends Authenticatable
         'price_alerts'        => 'boolean',
         'password'            => 'hashed',
     ];
+    public function rides()
+{
+    return $this->hasMany(Ride::class);
+}
 }

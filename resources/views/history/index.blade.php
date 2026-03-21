@@ -42,6 +42,16 @@
                     </div>
                 </div>
             </div>
+            <div class="flex items-center justify-between mt-3">
+            <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+           {{ ucfirst($ride->booking_status) }}
+           </span>
+          <a href="{{ route('rides.rate', $ride->id) }}"
+          class="text-xs font-semibold px-3 py-1 rounded-full text-white"
+          style="background: #39C70D">
+           ⭐ Rate Ride
+         </a>
+         </div>
             @endforeach
         </div>
     @endif

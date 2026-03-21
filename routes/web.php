@@ -3,6 +3,29 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RideHistoryController;
+use App\Http\Controllers\RatingController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PaymentMethodController;
+
+Route::get('/help', function () {
+    return view('help');
+})->name('help');
+
+Route::get('/settings', function () {
+    return view('settings');
+})->name('settings');
+
+Route::get('/payment-methods', [PaymentMethodController::class, 'index'])->name('payment.index');
+Route::post('/payment-methods', [PaymentMethodController::class, 'store'])->name('payment.store');
+Route::patch('/payment-methods/{id}/default', [PaymentMethodController::class, 'setDefault'])->name('payment.default');
+Route::delete('/payment-methods/{id}', [PaymentMethodController::class, 'destroy'])->name('payment.destroy');
+
+Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+Route::delete('/notifications/{id}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
+Route::get('/notifications/unread-count', [NotificationController::class, 'unreadCount'])->name('notifications.unread');
+
+Route::get('/rides/{rideId}/rate', [RatingController::class, 'create'])->name('rides.rate');
+Route::post('/rides/{rideId}/rate', [RatingController::class, 'store'])->name('rides.rate.store');
 
 // Root — redirect guests to landing page, logged in users to rides
 Route::get('/', function () {
