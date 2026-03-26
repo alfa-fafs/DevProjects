@@ -129,8 +129,7 @@
             width: 92%;
             max-width: 360px;
             object-fit: contain;
-            position: relative;
-            z-index: 1;
+            mix-blend-mode: multiply;
         }
 
         /* Bottom Card */
@@ -268,7 +267,7 @@
     <div class="car-wrap">
         {{-- Replace src with your actual car image path --}}
         <img
-            src="https://www.freepnglogos.com/uploads/white-car-png/white-car-png-all-wheel-drive-cars-mazda-14.png"
+            src={{asset('images/car.png') }}
             alt="Car"
             class="car-img"
         />
